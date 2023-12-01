@@ -3,6 +3,7 @@ package com.example.listviewsejercicio
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import com.example.listviewsejercicio.adapters.PersonaAdapter
 import com.example.listviewsejercicio.models.Persona
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,9 @@ class MainActivity : AppCompatActivity() {
 
         var listViewItems: ListView = findViewById(R.id.listViewItems)
         var listaPersonas = leerPersonas()
+        var personaAdapter = PersonaAdapter(this, listaPersonas)
+
+        listViewItems.adapter = personaAdapter
     }
 
     private fun leerPersonas(): ArrayList<Persona> {
