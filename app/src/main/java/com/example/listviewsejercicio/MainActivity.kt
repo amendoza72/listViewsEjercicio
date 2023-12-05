@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private fun leerPersonas(): ArrayList<Persona> {
         var lista = ArrayList<Persona>()
 
-        for (indice in (0 ..10)){
+        for (indice in (0 ..500)){
             var persona = Persona ("Nombre$indice", "Apellido$indice")
             lista.add(persona)
         }

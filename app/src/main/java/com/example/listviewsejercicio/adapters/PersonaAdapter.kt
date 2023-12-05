@@ -9,6 +9,11 @@ import com.example.listviewsejercicio.R
 import com.example.listviewsejercicio.models.Persona
 
 class PersonaAdapter(private val activity:Activity, private val listaPersonas:ArrayList<Persona>): BaseAdapter() {
+
+    class ViewHolder{
+        lateinit var textViewNombre: TextView
+        lateinit var textViewApellido: TextView
+    }
     override fun getCount(): Int {
        return listaPersonas.size
     }
@@ -22,16 +27,24 @@ class PersonaAdapter(private val activity:Activity, private val listaPersonas:Ar
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var inflater = activity.layoutInflater
-        var myView = inflater.inflate(R.layout.item_persona_layout, null)
 
-        var textViewNombre = myView.findViewById<TextView>(R.id.textViewNombre)
-        var textViewApellido = myView.findViewById<TextView>(R.id.textViewApellido)
+        var myView = convertView
+        var viewHolder = ViewHolder()
 
-        textViewNombre.text = listaPersonas[position].nombre
-        textViewApellido.text = listaPersonas[position].apellido
+        if (myView == null) {
+            var inflater = activity.layoutInflater
+            myView = inflater.inflate(R.layout.item_persona_layout, null)
+            viewHolder.textViewNombre = myView.findViewById<TextView>(R.id.textViewNombre)
+            viewHolder.textViewApellido = myView.findViewById<TextView>(R.id.textViewApellido)
+            myView.setTag(viewHolder)
+        }
+        else{
+            viewHolder = myView.tag as ViewHolder
+        }
+        viewHolder.textViewNombre.text = listaPersonas[position].nombre
+        viewHolder.textViewApellido.text = listaPersonas[position].apellido
 
-        return myView
+        return myView!!
     }
 
 }
